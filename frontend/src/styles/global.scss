@@ -1,0 +1,88 @@
+@use "variables" as *;
+
+#root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body,
+textarea,
+input {
+  font-family: "Lato", sans-serif;
+}
+
+main {
+  padding-top: $navbarHeight;
+  min-height: calc(100vh - var(--footerHeight));
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+select,
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: $grade60Font;
+}
+
+h3 {
+  font-size: $grade50Font;
+}
+
+h4 {
+  font-size: $grade45Font;
+}
+
+h5 {
+  font-size: $grade40Font;
+  text-align: initial;
+}
+
+h6 {
+  font-size: $grade30Font;
+}

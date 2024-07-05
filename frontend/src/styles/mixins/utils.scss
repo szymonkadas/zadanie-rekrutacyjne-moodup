@@ -1,0 +1,213 @@
+@mixin flex-direction($direction) {
+  @if $direction == column {
+    @include flex-direction-column;
+  } @else if $direction == row {
+    @include flex-direction-row;
+  } @else {
+    @error "Invalid flex direction: #{$direction}. Use 'row' or 'column'.";
+  }
+}
+
+@mixin flex-column {
+  @include display-flex;
+  @include flex-direction(column);
+}
+
+@mixin flex-row {
+  @include display-flex;
+  @include flex-direction(row);
+}
+
+@mixin display-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex-direction-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+@mixin flex-direction-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+@mixin align-items($alignment) {
+  @if $alignment == center {
+    @include align-items-center;
+  } @else if $alignment == start {
+    @include align-items-start;
+  } @else if $alignment == end {
+    @include align-items-end;
+  } @else if $alignment == stretch {
+    @include align-items-stretch;
+  } @else if $alignment == baseline {
+    @include align-items-baseline;
+  } @else {
+    @error "Invalid alignment value: #{$alignment}. Use 'center', 'start', 'end', 'stretch', or 'baseline'.";
+  }
+}
+
+@mixin align-items-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@mixin align-items-start {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+@mixin align-items-end {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+@mixin align-items-stretch {
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+@mixin align-items-baseline {
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+@mixin justify-content($alignment) {
+  @if $alignment == center {
+    @include justify-content-center;
+  } @else if $alignment == start {
+    @include justify-content-start;
+  } @else if $alignment == end {
+    @include justify-content-end;
+  } @else if $alignment == space-between {
+    @include justify-content-space-between;
+  } @else if $alignment == space-around {
+    @include justify-content-space-around;
+  } @else if $alignment == space-evenly {
+    @include justify-content-space-evenly;
+  } @else {
+    @error "Invalid justification value: #{$alignment}. Use 'center', 'start', 'end', 'space-between', 'space-around', or 'space-evenly'.";
+  }
+}
+
+@mixin justify-content-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+@mixin justify-content-start {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+@mixin justify-content-end {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+@mixin justify-content-space-between {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+@mixin justify-content-space-around {
+  -ms-flex-pack: justify;
+  -webkit-box-pack: justify;
+  justify-content: space-around;
+}
+
+@mixin justify-content-space-evenly {
+  -ms-flex-pack: distribute;
+  justify-content: space-evenly;
+}
+
+@mixin width($value) {
+  @if $value == fit-content {
+    @include width-fit-content;
+  } @else if $value == max-content {
+    @include width-max-content;
+  } @else if $value == min-content {
+    @include width-min-content;
+  } @else {
+    width: $value;
+  }
+}
+
+@mixin width-fit-content {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+@mixin width-max-content {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+@mixin width-min-content {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
+@mixin height($value) {
+  @if $value == fit-content {
+    @include height-fit-content;
+  } @else if $value == max-content {
+    @include height-max-content;
+  } @else if $value == min-content {
+    @include height-min-content;
+  } @else {
+    height: $value;
+  }
+}
+
+@mixin height-fit-content {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+@mixin height-max-content {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+@mixin height-min-content {
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
+@mixin user-select($select) {
+  @if $select == none {
+    @include user-select-none;
+  } @else {
+    @error "Invalid user-select value: #{$select}. Use 'none'.";
+  }
+}
+
+@mixin user-select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

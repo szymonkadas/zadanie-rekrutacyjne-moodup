@@ -1,0 +1,83 @@
+@use "./_variables";
+@import "./mixins/utils.scss";
+
+@mixin miniMobile {
+  @media screen and (max-width: calc(#{variables.$miniMobileX} + 20px)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: variables.$mobileX) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: variables.$tabletX) {
+    @content;
+  }
+}
+
+@mixin tablet-plus {
+  @media screen and (max-width: variables.$tabletPlusX) {
+    @content;
+  }
+}
+
+@mixin hd {
+  @media screen and (max-width: variables.$hdX) {
+    @content;
+  }
+}
+
+@mixin full-hd {
+  @media screen and (max-width: variables.$fullHdX) {
+    @content;
+  }
+}
+
+@mixin two-k {
+  @media screen and (max-width: variables.$twoKX) {
+    @content;
+  }
+}
+
+@mixin four-k {
+  @media screen and (max-width: variables.$fourKX) {
+    @content;
+  }
+}
+
+@mixin border-box-shadow {
+  -webkit-box-shadow: variables.$boxShadow;
+  box-shadow: variables.$boxShadow;
+  border-radius: variables.$defaultBorderRadius;
+  background-color: variables.$backgroundColor;
+}
+
+//0.2s
+@mixin transition {
+  -webkit-transition: variables.$defaultTransistionTime;
+  -o-transition: variables.$defaultTransistionTime;
+  transition: variables.$defaultTransistionTime;
+}
+
+//scale(1.1)
+@mixin transform {
+  -webkit-transform: variables.$defaultTransformScale;
+  -ms-transform: variables.$defaultTransformScale;
+  transform: variables.$defaultTransformScale;
+}
+
+@mixin darkHover {
+  &:hover {
+    background-color: variables.$secondaryColor;
+  }
+}
+
+@mixin defaultBorder {
+  padding: variables.$defaultSpacing;
+  border-radius: variables.$defaultBorderRadius;
+  border: variables.$defaultBorderWidth solid variables.$primaryColor;
+}
