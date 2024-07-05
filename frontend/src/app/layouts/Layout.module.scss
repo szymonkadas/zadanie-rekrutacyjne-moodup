@@ -4,18 +4,22 @@
 .contentWrapper {
   @include mix.flex-row;
   gap: calc(#{var.$defaultSpacing} * 2);
-  background-color: var.$backgroundColor;
   position: relative;
+  height: 70dvh;
+  width: 70dvw;
 }
 
 
 main{
-
+  width: 100%;
+  background-color: var.$backgroundColor;
+  border-radius: calc(#{var.$defaultBorderRadius * 3});
 }
 
 .mainSignedOff {
   @include mix.flex-column;
-  @include mix.justify-content-center;
+  @include mix.justify-content-space-around;
+  @include mix.align-items-center;
 
   background-color: var.$backgroundColor;
   width: 100%;
@@ -27,18 +31,25 @@ main{
 
 }
 
-
+$iconBigSize: 21%;
+$iconSmallSize: calc(#{$iconBigSize}/2);
+$iconYDistance: 15%;
 .iconBig {
   position: absolute;
-  top: 20%;
-  left: 0;
-  height: 21%;
-  width: 21%;
+  top: $iconYDistance;
+  left: calc(#{$iconBigSize}/-2);
+  height: $iconBigSize;
+  width: $iconBigSize;
 }
+
 .iconSmall {
   position: absolute;
-  right: 0;
-  bottom: 20%;
-  height: 10%;
-  width: 10%;
+  right: calc(#{$iconSmallSize}/-2);
+  bottom: $iconYDistance;;
+  height: $iconSmallSize;
+  width: $iconSmallSize;
+}
+
+.iconBig, .iconSmall {
+  position: absolute;
 }

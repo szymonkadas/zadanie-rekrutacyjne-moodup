@@ -1,0 +1,46 @@
+@use "./styles/variables" as var;
+@use "./styles/mixins" as mix;
+
+:root {
+  font-family: var.$font, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var.$textColor;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+//a:hover {
+//  color: #535bf2;
+//}
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  @include mix.justify-content-center;
+  @include mix.align-items-center;
+  width: 100dvw;
+  height: 100dvh;
+  background-color:  var.$primaryColor;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: var.$altFont;
+  font-weight: 400;
+  margin: 0;
+}
+
+p{
+  margin: 0;
+}
