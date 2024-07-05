@@ -7,7 +7,7 @@ export default function useAuth() {
     setAuth,
   }: {
     auth: AuthCredentials;
-    setAuth: React.Dispatch<React.SetStateAction<AuthCredentials>>;
+    setAuth: (value: AuthCredentials) => void;
   } = useContext(AuthContext);
   return { auth, setAuth };
 }

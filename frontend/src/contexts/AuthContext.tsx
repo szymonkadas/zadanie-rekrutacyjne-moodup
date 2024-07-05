@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 interface IAuthContext {
   auth: AuthCredentials;
-  setAuth: (value: any) => void;
+  setAuth: (value: AuthCredentials) => void;
 }
 
 export type AuthCredentials = {
