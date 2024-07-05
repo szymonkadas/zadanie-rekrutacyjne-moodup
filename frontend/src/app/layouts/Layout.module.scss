@@ -1,0 +1,44 @@
+@use "../../styles/variables" as var;
+@use "../../styles/mixins" as mix;
+
+.contentWrapper {
+  @include mix.flex-row;
+  gap: calc(#{var.$defaultSpacing} * 2);
+  background-color: var.$backgroundColor;
+  position: relative;
+}
+
+
+main{
+
+}
+
+.mainSignedOff {
+  @include mix.flex-column;
+  @include mix.justify-content-center;
+
+  background-color: var.$backgroundColor;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.mainSignedIn{
+
+}
+
+
+.iconBig {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  height: 21%;
+  width: 21%;
+}
+.iconSmall {
+  position: absolute;
+  right: 0;
+  bottom: 20%;
+  height: 10%;
+  width: 10%;
+}
