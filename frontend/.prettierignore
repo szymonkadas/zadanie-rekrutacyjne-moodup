@@ -1,0 +1,17 @@
+node_modules
+public
+.husky
+husky
+.env
+*.md
+.eslint.cjs
+.eslint.json
+.gitignore
+.prettierignore
+.prettierrc
+commitlint.config.cjs
+package-lock.json
+package.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts

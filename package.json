@@ -1,0 +1,13 @@
+{
+  "name": "chuck-nornik",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Chuck Nornik",
+  "license": "All Rights Reserved",
+  "devDependencies": {
+    "husky": "^9.0.11"
+  }
+}
