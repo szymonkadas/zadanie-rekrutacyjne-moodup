@@ -7,7 +7,7 @@ export default function Layout() {
   const { auth } = useAuth();
   return (
     <div className={styles.contentWrapper}>
-      {auth ? (
+      {auth?.email ? (
         // <NavBar />
         <main className={styles.mainSignedIn}>
           <Outlet />
