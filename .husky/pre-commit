@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Navigate to the frontend and run precommit scripts defined there
+cd frontend && npm run precommit
