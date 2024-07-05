@@ -1,0 +1,55 @@
+@use "../../styles/variables" as var;
+@use "../../styles/mixins" as mix;
+
+.icon{
+    width: 64px;
+    height: 64px;
+}
+
+.mainContentWrapper, .mainContent, .mainContentForm{
+    @include mix.flex-column;
+
+
+}
+
+.mainContentWrapper{
+    gap: calc(#{var.$defaultSpacing} * 3);
+    width: calc(8/12 * 100%);
+    @include mix.align-items-center;
+
+
+    .changeAuthAction{
+        font-family: var.$altFont;
+        a{
+            color: var.$textColor;
+            font-weight: 700;
+        }
+    }
+}
+
+
+.mainContent{
+    @include mix.align-items-center;
+    gap: calc(#{var.$defaultSpacing} * 6);
+    width: 100%;
+    .mainContentTitle{
+        font-weight: 400;
+        font-family: var.$altFont;
+    }
+    .mainContentForm{
+        gap: calc(#{var.$defaultSpacing} * 4);
+        @include mix.align-items-center;
+        padding: 0 calc((1/8 * 100%) + (#{var.$defaultSpacing} * 2));
+        width: 100%;
+        *{
+            width: 100%;
+        }
+    }
+}
+
+
+.note{
+    color: var.$secondaryColor;
+    font-style: italic;
+    font-weight: 600;
+}
