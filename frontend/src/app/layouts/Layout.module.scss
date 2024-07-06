@@ -9,8 +9,7 @@
   width: 70dvw;
 }
 
-
-main{
+main {
   width: 100%;
   background-color: var.$backgroundColor;
   border-radius: calc(#{var.$defaultBorderRadius * 3});
@@ -27,29 +26,29 @@ main{
   position: relative;
 }
 
-.mainSignedIn{
-
+.mainSignedIn {
 }
 
 $iconBigSize: 21%;
-$iconSmallSize: calc(#{$iconBigSize}/2);
+$iconSmallSize: calc(#{$iconBigSize}/ 2);
 $iconYDistance: 15%;
 .iconBig {
   position: absolute;
   top: $iconYDistance;
-  left: calc(#{$iconBigSize}/-2);
+  left: calc(#{$iconBigSize}/ -2);
   height: $iconBigSize;
   width: $iconBigSize;
 }
 
 .iconSmall {
   position: absolute;
-  right: calc(#{$iconSmallSize}/-2);
-  bottom: $iconYDistance;;
+  right: calc(#{$iconSmallSize}/ -2);
+  bottom: $iconYDistance;
   height: $iconSmallSize;
   width: $iconSmallSize;
 }
 
-.iconBig, .iconSmall {
+.iconBig,
+.iconSmall {
   position: absolute;
 }

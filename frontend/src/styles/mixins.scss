@@ -79,5 +79,5 @@
 @mixin defaultBorder {
   padding: variables.$defaultSpacing;
   border-radius: variables.$defaultBorderRadius;
-  border: variables.$defaultBorderWidth solid variables.$primaryColor;
+  border: variables.$defaultBorderWidth solid variables.$accentColor;
 }
