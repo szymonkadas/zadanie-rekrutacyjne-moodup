@@ -40,7 +40,7 @@ export default function TextInput({
         initialStyle ?? ""
       }`}
     >
-      <span>{label}</span>
+      <span className={styles.label}>{label}</span>
       <input
         className={`${styles.textInput} ${initialStyle ?? ""}`}
         type={type || TextInputTypes.TEXT}

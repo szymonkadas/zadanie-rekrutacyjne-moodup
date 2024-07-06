@@ -1,0 +1,53 @@
+@use "../../styles/_variables.scss" as v;
+@use "../../styles/mixins.scss" as m;
+
+.inputContainer,
+.inputContainerRow {
+  @include m.display-flex;
+  gap: calc(#{v.$defaultSpacing} / 2);
+  @include m.justify-content-space-between;
+  @include m.mobile {
+    gap: v.$defaultSpacing;
+  }
+}
+
+.inputContainer {
+  @include m.flex-direction-column;
+  width: 100%;
+  @include m.defaultBorder;
+  border-radius: calc(#{v.$defaultBorderRadius}/ 2);
+  position: relative;
+  padding: calc(#{v.$defaultSpacing * 2}) v.$defaultSpacing * 1.5;
+
+  span{
+    margin: auto;
+    font-size: v.$grade5Font;
+  }
+
+  .label {
+    position: absolute;
+    //outer padding + 1/4 of font size (1/4 = lineheight padding for the font)
+    top: calc((#{v.$defaultSpacing} + (#{v.$grade5Font}/ 4)) * -1);
+    background-color: v.$backgroundColor;
+    width: fit-content !important;
+    padding: 0 calc(#{v.$defaultSpacing} / 2);
+    color: v.$accentDark;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-size: v.$grade4Font;
+  }
+}
+
+.notAllowed {
+  cursor: not-allowed;
+}
+
+.textInputContainer {
+  @include m.height-fit-content;
+  .textInput {
+    width: 100%;
+  }
+}

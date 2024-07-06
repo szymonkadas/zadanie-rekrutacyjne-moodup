@@ -1,0 +1,7 @@
+@use "../../styles/variables";
+
+.error {
+  color: variables.$primaryColor;
+  text-align: right;
+  margin-right: variables.$defaultSpacing;
+}
