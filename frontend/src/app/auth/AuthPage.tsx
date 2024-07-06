@@ -54,7 +54,7 @@ export default function AuthPage({
       };
 
       console.log(formData);
-    //   send to backend
+    //   send to api
     //   if(AuthActionEnum.LOGIN === authAction) {
     //   navigate(from);
       console.log(from);
