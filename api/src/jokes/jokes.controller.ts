@@ -13,12 +13,6 @@ export class JokesController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('category')
-  getJokeByCategory(@Query('category') category: string) {
-    return this.jokesService.getJokeByCategory(category);
-  }
-
-  @UseGuards(AuthGuard('jwt'))
   @Get('categories')
   getCategories() {
     return this.jokesService.getCategories();

@@ -1,7 +1,11 @@
 const baseUrl = import.meta.env.VITE_APP_API_BASE_URL;
 
 export const httpClient = {
-  post: async <Payload, ResponseData>(url: string, payload?: Payload, authCredentials?: string) => {
+  post: async <Payload, ResponseData>(
+    url: string,
+    payload?: Payload,
+    authCredentials?: string
+  ) => {
     const headers = createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
@@ -17,11 +21,11 @@ export const httpClient = {
   },
 
   get: async <ResponseData>(url: string, authCredentials?: string) => {
-    const headers =         createHeaders(authCredentials);
+    const headers = createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "GET",
-        headers
+        headers,
       });
 
       return handleResponse<ResponseData>(response);
@@ -36,7 +40,7 @@ export const httpClient = {
     headers?: AdditionalHeaders,
     authCredentials?: string
   ) => {
-    const basicHeaders =         createHeaders(authCredentials);
+    const basicHeaders = createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "PUT",
@@ -53,8 +57,12 @@ export const httpClient = {
       return Promise.reject(error);
     }
   },
-  patch: async <Payload, ResponseData>(url: string, payload?: Payload, authCredentials?: string) => {
-    const headers =         createHeaders(authCredentials);
+  patch: async <Payload, ResponseData>(
+    url: string,
+    payload?: Payload,
+    authCredentials?: string
+  ) => {
+    const headers = createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "PATCH",
@@ -73,7 +81,7 @@ export const httpClient = {
     headers?: AdditionalHeaders,
     authCredentials?: string
   ) => {
-    const basicHeaders =         createHeaders(authCredentials);
+    const basicHeaders = createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "DELETE",

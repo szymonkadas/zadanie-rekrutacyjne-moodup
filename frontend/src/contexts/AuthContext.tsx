@@ -9,7 +9,6 @@ export type AuthCredentials = {
   accessToken: string;
 };
 
-
 export const LoggedOutAuthState: AuthCredentials = {
   email: "",
   accessToken: "",

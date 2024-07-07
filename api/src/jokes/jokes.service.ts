@@ -6,18 +6,13 @@ import { map } from 'rxjs/operators';
 export class JokesService {
   constructor(private httpService: HttpService) {}
 
-  async getRandomJoke() {
+  async getRandomJoke(category?: string) {
     return this.httpService
-      .get('https://api.chucknorris.io/jokes/random')
+      .get(
+        `https://api.chucknorris.io/jokes/random${category ? `?category=${category}` : ''}`,
+      )
       .pipe(map((response) => response.data));
   }
-
-  async getJokeByCategory(category: string) {
-    return this.httpService
-      .get(`https://api.chucknorris.io/jokes/random?category=${category}`)
-      .pipe(map((response) => response.data));
-  }
-
   async getCategories() {
     return this.httpService
       .get('https://api.chucknorris.io/jokes/categories')

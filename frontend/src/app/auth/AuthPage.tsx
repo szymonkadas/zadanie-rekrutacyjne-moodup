@@ -1,19 +1,17 @@
-import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon/Icon.tsx";
 import { TextInputTypes } from "../../components/Inputs/InputType.ts";
 import TextInput from "../../components/Inputs/TextInput.tsx";
 import { RoutePaths } from "../../data/DataRoutes.ts";
 import { loginKeys } from "../../data/loginKeys.ts";
-import {
-  GenericObjectWithStrings
-} from "../../lib/utils/validationFunctions/isSuccessfulValidation.ts";
-import styles from "./AuthPage.module.scss";
-import { AuthActionEnum } from "./utils.ts";
+import useAuth from "../../hooks/useAuth.tsx";
+import apiClient from "../../lib/apiClient.ts";
+import { GenericObjectWithStrings } from "../../lib/utils/validationFunctions/isSuccessfulValidation.ts";
 import { validateEmail } from "../../lib/utils/validationFunctions/validateEmail.ts";
 import { validatePassword } from "../../lib/utils/validationFunctions/validatePassword.ts";
-import apiClient from '../../lib/apiClient.ts';
-import useAuth from '../../hooks/useAuth.tsx';
+import styles from "./AuthPage.module.scss";
+import { AuthActionEnum } from "./utils.ts";
 
 // The logic here's kinda redundant and messy but its really fast dev cycle so xd (trying to deliver in 20 hours~~)
 export default function AuthPage({
@@ -22,7 +20,7 @@ export default function AuthPage({
   authAction: AuthActionEnum;
 }) {
   const navigate = useNavigate();
-  const {  setAuth} = useAuth()
+  const { setAuth } = useAuth();
   const { title, changeActionText, linkText, linkTo } =
     getAuthPageValues(authAction);
   const [email, setEmail] = useState("");
@@ -30,7 +28,7 @@ export default function AuthPage({
   const [errorMessages, setErrorMessages] = useState({
     email: "",
     password: "",
-    api: ""
+    api: "",
   });
 
   const location = useLocation();
@@ -41,29 +39,55 @@ export default function AuthPage({
     setter: Dispatch<string>
   ) => {
     setter(event.target.value);
-    setErrorMessages((prevState) => ({ ...prevState, [event.target.name]: "" }));
+    setErrorMessages((prevState) => ({
+      ...prevState,
+      [event.target.name]: "",
+    }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // in case if someone manually changes button state
-    const {errors: emailErrors, success: emailSuccess, parsedFormData: parsedEmailData} = validateEmail({email});
-    const {errors: passwordErrors, success: passwordSuccess, parsedFormData: parsedPasswordData} = validatePassword({password});
+    const {
+      errors: emailErrors,
+      success: emailSuccess,
+      parsedFormData: parsedEmailData,
+    } = validateEmail({ email });
+    const {
+      errors: passwordErrors,
+      success: passwordSuccess,
+      parsedFormData: parsedPasswordData,
+    } = validatePassword({ password });
 
-    setErrorMessages((prevState) => ({ ...prevState, ...emailErrors, ...passwordErrors }));
-    if(emailSuccess && passwordSuccess) {
-
-      try{
-        const response = await (authAction === AuthActionEnum.REGISTER ? apiClient.register : apiClient.login)(parsedEmailData.email, parsedPasswordData.password);
+    setErrorMessages((prevState) => ({
+      ...prevState,
+      ...emailErrors,
+      ...passwordErrors,
+    }));
+    if (emailSuccess && passwordSuccess) {
+      try {
+        const response = await (authAction === AuthActionEnum.REGISTER
+          ? apiClient.register
+          : apiClient.login)(
+          parsedEmailData.email,
+          parsedPasswordData.password
+        );
         setAuth(response);
         navigate(from, { replace: true });
-      }
+      //   @ts-ignore
+      } catch (e: { message: string; error: string; statusCode: number }) {
         // @ts-ignore
-      catch(e: { message: string; error: string; statusCode: number }) {
-        const errorMessage = Object.hasOwn(e, "message") ? e.message : "Server connection error";
-        const errorStatus = Object.hasOwn(e, "statusCode") ? ` - error status: ${e.statusCode}` : "unknown";
-        setErrorMessages((prevState) => ({ ...prevState, api: `${errorMessage}${errorStatus}` }));
+        const errorMessage = Object.hasOwn(e, "message")
+          ? e.message
+          : "Server connection error";
+        const errorStatus = Object.hasOwn(e, "statusCode")
+          ? ` - error status: ${e.statusCode}`
+          : "unknown";
+        setErrorMessages((prevState) => ({
+          ...prevState,
+          api: `${errorMessage}${errorStatus}`,
+        }));
       }
     }
   };
@@ -83,18 +107,22 @@ export default function AuthPage({
   }
 
   const isButtonDisabled = () => {
-    if(email === "" || password === "") {
+    if (email === "" || password === "") {
       return true;
-    }else{
-      const emailSuccess = validateField({email}, validateEmail, false);
-      const passwordSuccess = validateField({password}, validatePassword, false);
-      return !emailSuccess || !passwordSuccess
+    } else {
+      const emailSuccess = validateField({ email }, validateEmail, false);
+      const passwordSuccess = validateField(
+        { password },
+        validatePassword,
+        false
+      );
+      return !emailSuccess || !passwordSuccess;
     }
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     setErrorMessages((prevState) => ({ ...prevState, api: "" }));
-  }, [email, password])
+  }, [email, password]);
 
   return (
     <>
@@ -104,14 +132,18 @@ export default function AuthPage({
           <h1 className={styles.mainContentTitle}>
             Explore "Chuck Jokes" with us!
           </h1>
-          {errorMessages.api && <p className={styles.mainContentError}>{errorMessages.api}</p>}
+          {errorMessages.api && (
+            <p className={styles.mainContentError}>{errorMessages.api}</p>
+          )}
           <form className={styles.mainContentForm} onSubmit={handleSubmit}>
             <TextInput
               value={email}
               type={TextInputTypes.EMAIL}
               name={loginKeys.EMAIL}
               onChange={(event) => handleChange(event, setEmail)}
-              onBlur={(event)=> validateField({email: event.target.value}, validateEmail)}
+              onBlur={(event) =>
+                validateField({ email: event.target.value }, validateEmail)
+              }
               placeholder={"Type your email"}
               label={"E-mail"}
               initialStyle={styles.mainContentInput}
@@ -123,7 +155,12 @@ export default function AuthPage({
               type={TextInputTypes.PASSWORD}
               name={loginKeys.PASSWORD}
               onChange={(event) => handleChange(event, setPassword)}
-              onBlur={(event)=> validateField({password: event.target.value}, validatePassword)}
+              onBlur={(event) =>
+                validateField(
+                  { password: event.target.value },
+                  validatePassword
+                )
+              }
               placeholder={"Type your password"}
               label={"Password"}
               initialStyle={styles.mainContentInput}
