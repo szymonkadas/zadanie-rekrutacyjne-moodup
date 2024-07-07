@@ -27,7 +27,10 @@ export default function NavBar() {
         </ul>
       </div>
 
-      <Link to={RoutePaths.LOGOUT} className={`${styles.navLink} ${styles.navAction}`}>
+      <Link
+        to={RoutePaths.LOGOUT}
+        className={`${styles.navLink} ${styles.navAction}`}
+      >
         Log out
       </Link>
       <p className={styles.note}>made with Chuck by Nornik - 2024</p>

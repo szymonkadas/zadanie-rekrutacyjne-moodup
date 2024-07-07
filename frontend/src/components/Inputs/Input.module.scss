@@ -34,7 +34,8 @@
     color: v.$accentDark;
   }
 
-  input, select {
+  input,
+  select {
     border: none;
     outline: none;
     font-size: v.$grade4Font;
@@ -52,8 +53,7 @@
   }
 }
 
-.selectElement{
-  background: none;
+.selectElement {
   appearance: none;
   background-image: url("/icons/chevron-down.svg");
   background-repeat: no-repeat;
@@ -62,6 +62,6 @@
   padding-right: calc(#{v.$defaultSpacing} * 3);
 }
 
-.selectElementOnDefault{
+.selectElementOnDefault {
   color: v.$accentDark;
 }

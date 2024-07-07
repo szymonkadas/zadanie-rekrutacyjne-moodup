@@ -7,17 +7,17 @@ import NotFound from "./flowManagers/NotFound.tsx";
 import RequireLoggedIn from "./flowManagers/RequireLoggedIn.tsx";
 import RequireLoggedOut from "./flowManagers/RequireLoggedOut.tsx";
 import Layout from "./layouts/Layout.tsx";
-import RandomJoke from './RandomJoke/RandomJoke.tsx';
+import RandomJoke from "./RandomJoke/RandomJoke.tsx";
 
 export default function App(): JSX.Element {
   const authRoutes = [
-    { path: RoutePaths.LOGIN, authAction: AuthActionEnum.LOGIN},
+    { path: RoutePaths.LOGIN, authAction: AuthActionEnum.LOGIN },
     { path: RoutePaths.REGISTRATION, authAction: AuthActionEnum.REGISTER },
   ];
 
   const protectedRoutes = [
     { path: RoutePaths.LOGOUT, element: <Logout /> },
-    { path: RoutePaths.RANDOM_JOKE, element: <RandomJoke />},
+    { path: RoutePaths.RANDOM_JOKE, element: <RandomJoke /> },
     // { path: RoutePaths.ADD_JOKE, element: <RandomJoke /> },
     // { path: RoutePaths.SAVED_JOKES, element: <RandomJoke /> },
   ];
@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
           ))}
         </Route>
         <Route element={<RequireLoggedIn />}>
-          <Route element={<RandomJoke />} index/>
+          <Route element={<RandomJoke />} index />
           {protectedRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}

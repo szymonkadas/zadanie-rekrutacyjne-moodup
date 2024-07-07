@@ -1,7 +1,7 @@
 @use "../../styles/variables.scss" as var;
 @use "../../styles/mixins.scss" as mix;
 
-.altButton{
+.altButton {
   background-color: var.$secondaryColor;
   border-color: var.$secondaryColor;
 }

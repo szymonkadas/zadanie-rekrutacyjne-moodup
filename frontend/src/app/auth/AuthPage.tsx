@@ -75,7 +75,7 @@ export default function AuthPage({
         );
         setAuth(response);
         navigate(from, { replace: true });
-      //   @ts-ignore
+        //   @ts-ignore
       } catch (e: { message: string; error: string; statusCode: number }) {
         // @ts-ignore
         const errorMessage = Object.hasOwn(e, "message")

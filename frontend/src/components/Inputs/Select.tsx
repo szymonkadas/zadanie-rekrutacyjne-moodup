@@ -13,33 +13,42 @@ type SelectProps = {
 };
 
 export default function Select({
-                                 name,
-                                 value,
-                                 onChange,
-                                 options,
-                                 label,
-                                 initialStyle,
-                                 required,
-                                 placeholder,
-                               }: SelectProps) {
-  const mappedOptions = useMemo(() =>
-    options.map((option, index) =>
-      <option value={option} key={`${name}${option}${index}`}>
-        {option}
-      </option>
-    ), [name, options]);
+  name,
+  value,
+  onChange,
+  options,
+  label,
+  initialStyle,
+  required,
+  placeholder,
+}: SelectProps) {
+  const mappedOptions = useMemo(
+    () =>
+      options.map((option, index) => (
+        <option value={option} key={`${name}${option}${index}`}>
+          {option}
+        </option>
+      )),
+    [name, options]
+  );
 
   return (
     <label className={`${styles.inputContainer} ${initialStyle ?? ""}`}>
       <span className={styles.label}>{label}</span>
       <select
         name={name}
-        className={`${styles.selectElement} ${styles.selectElementOnDefault} ${initialStyle ? initialStyle : ""}`}
+        className={`${styles.selectElement} ${styles.selectElementOnDefault} ${
+          initialStyle ? initialStyle : ""
+        }`}
         onChange={onChange}
         value={value}
         required={required}
       >
-        { !value && <option value="" disabled selected>{placeholder ?? "Select Option"}</option> }
+        {!value && (
+          <option value="" disabled selected>
+            {placeholder ?? "Select Option"}
+          </option>
+        )}
         {mappedOptions}
       </select>
     </label>

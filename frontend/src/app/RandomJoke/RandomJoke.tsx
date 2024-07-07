@@ -49,7 +49,9 @@ export default function RandomJoke() {
           placeholder={"Select a category"}
           options={categories}
         />
-        <button>Draw a random {impersonate ? impersonate : "Chuck Norris"} joke</button>
+        <button>
+          Draw a random {impersonate ? impersonate : "Chuck Norris"} joke
+        </button>
         <button className={styles.altButton}>Save this joke</button>
       </div>
     </div>
