@@ -6,23 +6,19 @@ interface IAuthContext {
 
 export type AuthCredentials = {
   email: string;
-  // maybe tokens?
-  // accessToken: string;
-  // refreshToken: string;
+  accessToken: string;
 };
 
-// initial value
+
 export const LoggedOutAuthState: AuthCredentials = {
   email: "",
-  // accessToken: "",
-  // refreshToken: "",
+  accessToken: "",
 };
 
 // For dev purposes (mocking logged in state):
 // const LoggedInAuthState: AuthCredentials = {
 //   email: "email@email.com",
-//   // accessToken: "okokokontojesrybafest6219410",
-//   // refreshToken: "blablablagibberishyadayadayada",
+// accessToken: "okokokontojesrybafest6219410",
 // };
 
 export const AuthContext = createContext<IAuthContext>({

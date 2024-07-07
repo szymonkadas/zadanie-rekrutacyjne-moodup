@@ -69,6 +69,10 @@
       }
     }
   }
+  .mainContentError{
+    color: var.$primaryColor;
+    font-style: italic;
+  }
 }
 
 .note {
@@ -76,3 +80,4 @@
   font-style: italic;
   font-weight: 600;
 }
+

@@ -1,5 +1,5 @@
-import { ChangeEvent, Dispatch, FormEvent, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { ChangeEvent, Dispatch, FormEvent, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Icon from "../../components/Icon/Icon.tsx";
 import { TextInputTypes } from "../../components/Inputs/InputType.ts";
 import TextInput from "../../components/Inputs/TextInput.tsx";
@@ -12,6 +12,8 @@ import styles from "./AuthPage.module.scss";
 import { AuthActionEnum } from "./utils.ts";
 import { validateEmail } from "../../lib/utils/validationFunctions/validateEmail.ts";
 import { validatePassword } from "../../lib/utils/validationFunctions/validatePassword.ts";
+import apiClient from '../../lib/apiClient.ts';
+import useAuth from '../../hooks/useAuth.tsx';
 
 // The logic here's kinda redundant and messy but its really fast dev cycle so xd (trying to deliver in 20 hours~~)
 export default function AuthPage({
@@ -19,6 +21,8 @@ export default function AuthPage({
 }: {
   authAction: AuthActionEnum;
 }) {
+  const navigate = useNavigate();
+  const {  setAuth} = useAuth()
   const { title, changeActionText, linkText, linkTo } =
     getAuthPageValues(authAction);
   const [email, setEmail] = useState("");
@@ -26,6 +30,7 @@ export default function AuthPage({
   const [errorMessages, setErrorMessages] = useState({
     email: "",
     password: "",
+    api: ""
   });
 
   const location = useLocation();
@@ -39,7 +44,7 @@ export default function AuthPage({
     setErrorMessages((prevState) => ({ ...prevState, [event.target.name]: "" }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // in case if someone manually changes button state
@@ -48,16 +53,18 @@ export default function AuthPage({
 
     setErrorMessages((prevState) => ({ ...prevState, ...emailErrors, ...passwordErrors }));
     if(emailSuccess && passwordSuccess) {
-      const formData = {
-        email: parsedEmailData.email,
-        password: parsedPasswordData.password
-      };
 
-      console.log(formData);
-    //   send to api
-    //   if(AuthActionEnum.LOGIN === authAction) {
-    //   navigate(from);
-      console.log(from);
+      try{
+        const response = await (authAction === AuthActionEnum.REGISTER ? apiClient.register : apiClient.login)(parsedEmailData.email, parsedPasswordData.password);
+        setAuth(response);
+        navigate(from, { replace: true });
+      }
+        // @ts-ignore
+      catch(e: { message: string; error: string; statusCode: number }) {
+        const errorMessage = Object.hasOwn(e, "message") ? e.message : "Server connection error";
+        const errorStatus = Object.hasOwn(e, "statusCode") ? ` - error status: ${e.statusCode}` : "unknown";
+        setErrorMessages((prevState) => ({ ...prevState, api: `${errorMessage}${errorStatus}` }));
+      }
     }
   };
 
@@ -85,6 +92,10 @@ export default function AuthPage({
     }
   }
 
+  useEffect(()=> {
+    setErrorMessages((prevState) => ({ ...prevState, api: "" }));
+  }, [email, password])
+
   return (
     <>
       <Icon src={"/icons/timberman.svg"} className={styles.icon} />
@@ -93,6 +104,7 @@ export default function AuthPage({
           <h1 className={styles.mainContentTitle}>
             Explore "Chuck Jokes" with us!
           </h1>
+          {errorMessages.api && <p className={styles.mainContentError}>{errorMessages.api}</p>}
           <form className={styles.mainContentForm} onSubmit={handleSubmit}>
             <TextInput
               value={email}
