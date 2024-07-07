@@ -8,8 +8,8 @@ export class JokesController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('random')
-  getRandomJoke() {
-    return this.jokesService.getRandomJoke();
+  getRandomJoke(@Query('category') category?: string) {
+    return this.jokesService.getRandomJoke(category);
   }
 
   @UseGuards(AuthGuard('jwt'))

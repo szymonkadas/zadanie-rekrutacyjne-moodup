@@ -1,42 +1,51 @@
-import { AuthCredentials } from "../contexts/AuthContext.tsx";
+import { AuthData } from "../contexts/AuthContext.tsx";
 import { httpClient } from "./httpClient";
 
 const apiClient = {
   register: async (
     email: string,
     password: string
-  ): Promise<AuthCredentials> => {
-    return httpClient.post<UserCredentials, AuthCredentials>("/auth/register", {
+  ): Promise<AuthData> => {
+    return httpClient.post<UserCredentials, AuthData>("/auth/register", {
       email,
       password,
     });
   },
 
-  login: async (email: string, password: string): Promise<AuthCredentials> => {
-    return httpClient.post<UserCredentials, AuthCredentials>("/auth/login", {
+  login: async (email: string, password: string): Promise<AuthData> => {
+    const response = await httpClient.post<UserCredentials, AuthData>("/auth/login", {
       email,
       password,
     });
+    return {
+      ...response
+    };
   },
 
   fetchRandomJoke: async (
-    credentials: AuthCredentials,
+    credentials: AuthData,
     category?: string
   ): Promise<Joke> => {
     return httpClient.get<Joke>(
-      `/jokes/random${category ? `?category=${category}` : ""}`,
-      credentials.accessToken
+      `/jokes/random${category ? `?category=${category}` : ""}`, credentials.accessToken
     );
   },
 
   fetchCategories: async (
-    credentials: AuthCredentials
-  ): Promise<Categories> => {
-    return httpClient.get<Categories>(
-      "/jokes/categories",
-      credentials.accessToken
+    credentials: AuthData
+  ): Promise<string[]> => {
+    return httpClient.get<string[]>(
+      "/jokes/categories", credentials.accessToken
     );
   },
+
+  saveJoke: async (
+    credentials: AuthData,
+    joke: string
+  ): Promise<void> => {
+    return httpClient.post("/jokes/save", { joke }, credentials.accessToken);
+  },
+
 };
 
 export default apiClient;
@@ -49,5 +58,3 @@ type UserCredentials = {
 type Joke = {
   value: string;
 };
-
-type Categories = string[];

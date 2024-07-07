@@ -1,36 +1,32 @@
-import { createContext, useState } from "react";
+import { createContext, ReactNode, useState } from 'react';
 interface IAuthContext {
-  auth: AuthCredentials;
-  setAuth: (value: AuthCredentials) => void;
+  auth: AuthData;
+  setAuth: (value: AuthData) => void;
 }
 
-export type AuthCredentials = {
+export type AuthData = {
   email: string;
   accessToken: string;
+  // jokes: string[]
 };
 
-export const LoggedOutAuthState: AuthCredentials = {
+export const LoggedOutAuthState: AuthData = {
   email: "",
   accessToken: "",
+  // jokes: []
 };
-
-// For dev purposes (mocking logged in state):
-// const LoggedInAuthState: AuthCredentials = {
-//   email: "email@email.com",
-// accessToken: "okokokontojesrybafest6219410",
-// };
 
 export const AuthContext = createContext<IAuthContext>({
   auth: LoggedOutAuthState,
-  setAuth: (val: AuthCredentials) => val,
+  setAuth: (val: AuthData) => val,
 });
 
 export function AuthContextProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
-  const [auth, setAuth] = useState<AuthCredentials>(LoggedOutAuthState);
+  const [auth, setAuth] = useState<AuthData>(LoggedOutAuthState);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs';
 
 @Injectable()
 export class JokesService {
@@ -11,15 +11,17 @@ export class JokesService {
       .get(
         `https://api.chucknorris.io/jokes/random${category ? `?category=${category}` : ''}`,
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        // map((joke) => {
+        //   this.usersService.addJokeToUser(email, joke.value);
+        //   return joke;
+        // }),
+      );
   }
   async getCategories() {
     return this.httpService
       .get('https://api.chucknorris.io/jokes/categories')
       .pipe(map((response) => response.data));
-  }
-
-  replaceNameInJoke(joke: string, name: string): string {
-    return joke.replace(/Chuck Norris/g, name);
   }
 }

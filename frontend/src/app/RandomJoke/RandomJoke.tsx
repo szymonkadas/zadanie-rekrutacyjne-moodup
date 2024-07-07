@@ -14,27 +14,30 @@ export default function RandomJoke() {
     "If Chuck Norris were to travel to an alternate dimension in which there was another Chuck Norris and they " +
       "both fight, they would both win"
   );
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     apiClient.fetchCategories(auth).then((categories) => {
       setCategories(categories);
     });
   }, []);
 
-  const fetchJoke = async ()=>{
+  const fetchJoke = async () => {
     setIsLoading(true);
     try {
-      const newJoke = await apiClient.fetchRandomJoke(auth, categoryIndex ? categories[categoryIndex] : undefined);
+      const newJoke = await apiClient.fetchRandomJoke(
+        auth,
+        categoryIndex ? categories[categoryIndex] : undefined
+      );
       setJoke(newJoke.value);
     } catch (e) {
       console.error(e);
     }
     setIsLoading(false);
-  }
+  };
 
-  const saveJoke = ()=>{
-    console.log('save!')
-  }
+  const saveJoke = () => {
+    console.log("save!");
+  };
 
   return (
     <div className={styles.pageWrapper}>
@@ -47,7 +50,9 @@ export default function RandomJoke() {
       <header>
         <h1>Get your random joke</h1>
         <blockquote className={styles.quote}>
-          {impersonate ? joke.replace(new RegExp("Chuck Norris", "g"), impersonate) : joke}
+          {impersonate
+            ? joke.replace(new RegExp("Chuck Norris", "g"), impersonate)
+            : joke}
         </blockquote>
       </header>
       <div className={styles.controls}>
@@ -70,10 +75,16 @@ export default function RandomJoke() {
           placeholder={"Select a category"}
           options={categories}
         />
-        <button onClick={fetchJoke}  disabled={isLoading}>
+        <button onClick={fetchJoke} disabled={isLoading}>
           Draw a random {impersonate ? impersonate : "Chuck Norris"} joke
         </button>
-        <button className={styles.altButton} onClick={saveJoke} disabled={isLoading}>Save this joke</button>
+        <button
+          className={styles.altButton}
+          onClick={saveJoke}
+          disabled={isLoading}
+        >
+          Save this joke
+        </button>
       </div>
     </div>
   );
