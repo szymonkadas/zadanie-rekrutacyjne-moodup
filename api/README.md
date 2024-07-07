@@ -8,7 +8,6 @@ This Nest.js service provides an API for user authentication and retrieving Chuc
 - JWT-based authentication
 - Fetching random Chuck Norris jokes
 - Fetching Chuck Norris jokes by category
-- Personalizing jokes by replacing "Chuck Norris" with a user-provided name
 - Fetching joke categories
 ## Installation
 Make sure you have [Node.js](http://nodejs.org/) installed. Then, clone this repository and install its dependencies.
@@ -17,10 +16,7 @@ git clone https://link_do_repo
 cd backend
 npm install
 ## Environment Setup
-Create a .env file in the root directory of the project and specify your environment variables:
-env
-JWT_SECRET=your_jwt_secret
-FRONTEND_URL=http://localhost:5173
+Env is already provided for convenience.
 
 ## Running the App
 After the installation, you can start the service locally using:
