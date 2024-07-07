@@ -19,7 +19,7 @@
   position: relative;
   padding: calc(#{v.$defaultSpacing * 2}) v.$defaultSpacing * 1.5;
 
-  span{
+  span {
     margin: auto;
     font-size: v.$grade5Font;
   }
@@ -34,7 +34,7 @@
     color: v.$accentDark;
   }
 
-  input {
+  input, select {
     border: none;
     outline: none;
     font-size: v.$grade4Font;
@@ -50,4 +50,18 @@
   .textInput {
     width: 100%;
   }
+}
+
+.selectElement{
+  background: none;
+  appearance: none;
+  background-image: url("/icons/chevron-down.svg");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  padding-right: calc(#{v.$defaultSpacing} * 3);
+}
+
+.selectElementOnDefault{
+  color: v.$accentDark;
 }
