@@ -3,7 +3,8 @@ This Nest.js service provides an API for user authentication and retrieving Chuc
 
 ### It has been made for MoodUp.academy by Szymon Kadaś in recruitment process.
 ## Features
-- User registration and login using email and password
+- User registration and login using email and password (lasting as long as the server runs, in order to save some 
+  time i've decided to not implement db connection)
 - JWT-based authentication
 - Fetching random Chuck Norris jokes
 - Fetching Chuck Norris jokes by category
@@ -19,6 +20,7 @@ npm install
 Create a .env file in the root directory of the project and specify your environment variables:
 env
 JWT_SECRET=your_jwt_secret
+FRONTEND_URL=http://localhost:5173
 
 ## Running the App
 After the installation, you can start the service locally using:

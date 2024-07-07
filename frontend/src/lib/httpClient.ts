@@ -1,16 +1,14 @@
 const baseUrl = import.meta.env.VITE_APP_API_BASE_URL;
 
 export const httpClient = {
-  post: async <Payload, ResponseData>(url: string, payload?: Payload) => {
+  post: async <Payload, ResponseData>(url: string, payload?: Payload, authCredentials?: string) => {
+    const headers = createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify(payload),
       });
-
       return handleResponse<ResponseData>(response);
     } catch (error) {
       console.error(error);
@@ -18,14 +16,12 @@ export const httpClient = {
     }
   },
 
-  get: async <ResponseData>(url: string) => {
+  get: async <ResponseData>(url: string, authCredentials?: string) => {
+    const headers =         createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers
       });
 
       return handleResponse<ResponseData>(response);
@@ -37,13 +33,15 @@ export const httpClient = {
   put: async <Payload, ResponseData, AdditionalHeaders = object>(
     url: string,
     payload?: Payload,
-    headers?: AdditionalHeaders
+    headers?: AdditionalHeaders,
+    authCredentials?: string
   ) => {
+    const basicHeaders =         createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          ...basicHeaders,
           ...headers,
         },
         body: JSON.stringify(payload),
@@ -55,13 +53,12 @@ export const httpClient = {
       return Promise.reject(error);
     }
   },
-  patch: async <Payload, ResponseData>(url: string, payload?: Payload) => {
+  patch: async <Payload, ResponseData>(url: string, payload?: Payload, authCredentials?: string) => {
+    const headers =         createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify(payload),
       });
 
@@ -73,13 +70,15 @@ export const httpClient = {
   },
   delete: async <ResponseData, AdditionalHeaders = object>(
     url: string,
-    headers?: AdditionalHeaders
+    headers?: AdditionalHeaders,
+    authCredentials?: string
   ) => {
+    const basicHeaders =         createHeaders(authCredentials);
     try {
       const response = await fetch(`${baseUrl}${url}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
+          ...basicHeaders,
           ...headers,
         },
       });
@@ -114,6 +113,17 @@ async function handleResponse<ResponseData>(
       } as RejectedHttpResponse);
     }
   }
+}
+
+function createHeaders(authCredentials?: string): HeadersInit {
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+  if (authCredentials) {
+    headers["Authorization"] = `Bearer ${authCredentials}`;
+  }
+
+  return headers;
 }
 
 export type RejectedHttpResponse = {
