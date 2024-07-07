@@ -17,7 +17,7 @@
   @include m.defaultBorder;
   border-radius: calc(#{v.$defaultBorderRadius}/ 2);
   position: relative;
-  padding: calc(#{v.$defaultSpacing * 2}) v.$defaultSpacing * 1.5;
+  padding: 0;
 
   span {
     margin: auto;
@@ -39,6 +39,7 @@
     border: none;
     outline: none;
     font-size: v.$grade4Font;
+    padding: calc(#{v.$defaultSpacing * 2}) v.$defaultSpacing * 1.5;
   }
 }
 
@@ -54,6 +55,7 @@
 }
 
 .selectElement {
+  background-color: transparent;
   appearance: none;
   background-image: url("/icons/chevron-down.svg");
   background-repeat: no-repeat;

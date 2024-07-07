@@ -1,11 +1,6 @@
 @use "../../styles/variables.scss" as var;
 @use "../../styles/mixins.scss" as mix;
 
-$primary-color: #4d4b63;
-$secondary-color: #ffffff;
-$background-color: #5b58a5;
-$note-color: #dfdfdf;
-
 .nav,
 .navHeader {
   @include mix.flex-column;
@@ -17,7 +12,7 @@ $note-color: #dfdfdf;
   background-color: var.$accentDark;
   border-radius: calc(#{var.$defaultBorderRadius} * 4);
   padding: calc(#{var.$defaultSpacing} * 4);
-  color: $secondary-color;
+  color: var.$backgroundColor;
   position: relative;
   box-shadow: var.$mainBoxShadow;
 
@@ -45,7 +40,8 @@ $note-color: #dfdfdf;
     text-decoration: none;
     font-weight: 600;
     font-size: 24px;
-    color: $secondary-color;
+    color: var.$backgroundColor;
+    text-transform: uppercase;
 
     &:hover {
       text-decoration: underline;

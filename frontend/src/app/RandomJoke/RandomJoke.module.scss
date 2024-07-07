@@ -1,7 +1,56 @@
 @use "../../styles/variables.scss" as var;
 @use "../../styles/mixins.scss" as mix;
 
+.pageWrapper {
+  @include mix.flex-column;
+  @include mix.justify-content-space-between;
+  position: relative;
+  height: 100%;
+  padding: calc(#{var.$defaultSpacing} * 12) calc(#{var.$defaultSpacing} * 12)
+    calc(#{var.$defaultSpacing} * 12) calc(#{var.$defaultSpacing} * 6);
+
+  header {
+    @include mix.flex-column;
+    gap: calc(#{var.$defaultSpacing} * 6);
+    h1 {
+      font-weight: 700;
+    }
+    blockquote {
+      font-family: var.$altFont;
+      font-style: italic;
+      font-size: var.$grade2Font;
+      font-weight: 600;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    gap: calc(#{var.$defaultSpacing} * 4);
+  }
+}
+
 .altButton {
   background-color: var.$secondaryColor;
   border-color: var.$secondaryColor;
+  &:hover {
+    background-color: var.$primaryColor;
+    border-color: var.$primaryColor;
+  }
+}
+
+.chuckImage {
+  $height: 118px;
+  border-radius: calc(#{var.$defaultBorderRadius}* 3);
+  border: 4px solid var.$backgroundColor;
+  position: absolute;
+  top: calc(-#{$height}/ 2);
+  left: 50%;
+  transform: translateX(-50%);
+  height: $height;
+  width: 440px;
+  object-fit: cover;
+  box-shadow: var.$mainBoxShadow;
 }

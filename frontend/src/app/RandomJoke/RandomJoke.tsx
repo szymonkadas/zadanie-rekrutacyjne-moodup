@@ -14,19 +14,40 @@ export default function RandomJoke() {
     "If Chuck Norris were to travel to an alternate dimension in which there was another Chuck Norris and they " +
       "both fight, they would both win"
   );
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     apiClient.fetchCategories(auth).then((categories) => {
       setCategories(categories);
     });
   }, []);
 
+  const fetchJoke = async ()=>{
+    setIsLoading(true);
+    try {
+      const newJoke = await apiClient.fetchRandomJoke(auth, categoryIndex ? categories[categoryIndex] : undefined);
+      setJoke(newJoke.value);
+    } catch (e) {
+      console.error(e);
+    }
+    setIsLoading(false);
+  }
+
+  const saveJoke = ()=>{
+    console.log('save!')
+  }
+
   return (
-    <div>
-      <img src={"/img/chuck.jpg"} alt={"Chuck Norris"} loading={"lazy"}></img>
+    <div className={styles.pageWrapper}>
+      <img
+        src={"/img/chuck.jpg"}
+        alt={"Chuck Norris"}
+        loading={"lazy"}
+        className={styles.chuckImage}
+      ></img>
       <header>
         <h1>Get your random joke</h1>
         <blockquote className={styles.quote}>
-          “{impersonate ? joke.replace("Chuck Norris", impersonate) : joke}”
+          {impersonate ? joke.replace(new RegExp("Chuck Norris", "g"), impersonate) : joke}
         </blockquote>
       </header>
       <div className={styles.controls}>
@@ -49,10 +70,10 @@ export default function RandomJoke() {
           placeholder={"Select a category"}
           options={categories}
         />
-        <button>
+        <button onClick={fetchJoke}  disabled={isLoading}>
           Draw a random {impersonate ? impersonate : "Chuck Norris"} joke
         </button>
-        <button className={styles.altButton}>Save this joke</button>
+        <button className={styles.altButton} onClick={saveJoke} disabled={isLoading}>Save this joke</button>
       </div>
     </div>
   );

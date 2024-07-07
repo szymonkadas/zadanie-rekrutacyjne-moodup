@@ -21,7 +21,7 @@ const apiClient = {
 
   fetchRandomJoke: async (
     credentials: AuthCredentials,
-    category: string
+    category?: string
   ): Promise<Joke> => {
     return httpClient.get<Joke>(
       `/jokes/random${category ? `?category=${category}` : ""}`,

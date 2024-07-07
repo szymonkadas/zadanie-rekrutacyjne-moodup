@@ -34,7 +34,7 @@ button {
   background-color: var.$primaryColor;
   color: var.$backgroundColor;
   font-size: calc(#{var.$grade4Font} - 1px);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   @include mix.defaultBorder;
   border-radius: calc(#{var.$defaultBorderRadius}/ 2);
@@ -51,6 +51,7 @@ button {
     background-color: rgba(0, 0, 0, 0.12);
     color: rgba(0, 0, 0, 0.38);
     cursor: not-allowed;
+    box-shadow: none;
   }
 }
 
