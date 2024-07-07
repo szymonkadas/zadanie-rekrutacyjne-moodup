@@ -1,0 +1,71 @@
+@use "../../styles/variables.scss" as var;
+@use "../../styles/mixins.scss" as mix;
+
+$primary-color: #4d4b63;
+$secondary-color: #ffffff;
+$background-color: #5b58a5;
+$note-color: #dfdfdf;
+
+.nav, .navHeader{
+  @include mix.flex-column;
+  @include mix.align-items-center;
+}
+.nav {
+  @include mix.justify-content-space-between;
+  font-family: var.$altFont;
+  background-color: var.$accentDark;
+  border-radius: calc(#{var.$defaultBorderRadius} * 4);
+  padding: calc(#{var.$defaultSpacing} * 4);
+  color: $secondary-color;
+  position: relative;
+  box-shadow: var.$mainBoxShadow;
+
+  .navHeader{
+    gap: calc(#{var.$defaultSpacing} * 6);
+    width: 100%;
+  }
+
+  .navLogo {
+    display: block;
+    width: 64px;
+    height: 64px;
+  }
+
+  .navList {
+    @include mix.flex-column;
+    gap: calc(#{var.$defaultSpacing} * 3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+  }
+
+  .navLink{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 24px;
+    color: $secondary-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .navAction{
+    margin-bottom: calc(#{var.$defaultSpacing}*5);
+    width: 100%;
+  }
+
+  .note {
+    position: absolute;
+    width: 100%;
+    bottom: calc(#{var.$defaultSpacing * 2});
+    left: 50%;
+    font-weight: 600;
+    transform: translateX(-50%);
+    font-size: calc(#{var.$grade6Font} + 1px);
+    color: var.$backgroundColor;
+    text-align: center;
+  }
+}

@@ -2,8 +2,9 @@
 @use "../../styles/mixins" as mix;
 
 .contentWrapper {
-  @include mix.flex-row;
-  gap: calc(#{var.$defaultSpacing} * 2);
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: calc(#{var.$defaultSpacing} * 3);
   position: relative;
   height: 70dvh;
   width: 70dvw;
@@ -13,12 +14,14 @@ main {
   width: 100%;
   background-color: var.$backgroundColor;
   border-radius: calc(#{var.$defaultBorderRadius * 3});
+  box-shadow: var.$mainBoxShadow;
 }
 
 .mainSignedOff {
   @include mix.flex-column;
   @include mix.justify-content-space-around;
   @include mix.align-items-center;
+  grid-column: 1/3;
 
   background-color: var.$backgroundColor;
   width: 100%;
