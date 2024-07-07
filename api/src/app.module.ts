@@ -6,7 +6,6 @@ import { UsersService } from './users/users.service';
 import { JokesModule } from './jokes/jokes.module';
 import { ConfigModule } from '@nestjs/config';
 
-
 @Module({
   imports: [AuthModule, JokesModule, ConfigModule.forRoot()],
   controllers: [AppController],

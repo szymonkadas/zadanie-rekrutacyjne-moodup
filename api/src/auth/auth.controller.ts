@@ -10,7 +10,6 @@ export class AuthController {
     private usersService: UsersService,
   ) {}
 
-  @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req) {
     const { email, password } = req.body;
@@ -28,9 +27,3 @@ export class AuthController {
     return this.authService.login(email, password);
   }
 }
-
-//@UseGuards(AuthGuard('jwt'))
-// @Get('protected')
-// getProtectedResource() {
-//   return { message: "This is a protected data" };
-// }
