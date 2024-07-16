@@ -1,8 +1,6 @@
 ## Zadanie rekrutacyjne dla moodup academy - Szymon Kadaś
 
-
 ### Backend readme w folderze api.
-
 
 Folder frontend:
 działa logowanie i rejestracja, oraz ekran z randomowymi cytatami
@@ -27,6 +25,4 @@ npm run start
 ````
 
 ### Ostatnia nota:
-Commity i branche są, nie ma pr'ek bo nie ma zdalnego repo (nie wiedziałem czy mogę dać na publica ani komu 
-udostępnić prywatnego a że zaczałem w weekend to jest jak jest) ani deploya :').
-
+brak deploy
